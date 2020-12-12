@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 ]
 
@@ -123,5 +124,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
+
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
+
+AUTH_USER_MODEL = 'users.User'
