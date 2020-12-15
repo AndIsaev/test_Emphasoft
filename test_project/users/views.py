@@ -1,20 +1,18 @@
 from rest_framework import viewsets
-
-
-from .serializers import UserSerializer
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.authentication import TokenAuthentication
+from .permissions import IsOwnerOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
+from .serializers import UserSerializer
 
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
-#     for user in User.objects.all():
-#         Token.objects.get_or_create(user=user)
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    """Вью для нашего юзера"""
     queryset = User.objects.all()
+    authentication_classes = (TokenAuthentication, )
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
+    def perform_create(self, serializer):
+        serializer.save(username=self.request.user)
