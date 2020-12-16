@@ -1,8 +1,8 @@
-from rest_framework import viewsets
-from rest_framework.authentication import TokenAuthentication
-from .permissions import IsOwnerAndAdminOrReadOnly
-from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets
+from .permissions import IsOwnerAndAdminOrReadOnly
 from .serializers import UserSerializer
 
 
