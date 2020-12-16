@@ -17,7 +17,6 @@ class ProfileTest(APITestCase):
         self.auth_client.force_login(self.user)
 
 
-
     def test_registration(self):
         """Создаем пользователя"""
         data = {"username": "test", "email": "test@skynet.com",
@@ -38,8 +37,6 @@ class ProfileTestGetPutDelete(APITestCase):
             self.user = User.objects.create_user(username="davinci",
                                                  password="coolart1764",
                                                  email="connor@skynet.com")
-
-
             self.token = Token.objects.create(user=self.user)
             self.api_authentication()
             self.unauth_client = Client()
@@ -86,4 +83,3 @@ class ProfileTestGetPutDelete(APITestCase):
             response = self.client.delete("/api/v1/users/1/")
             print(response)
             self.assertEqual(response.status_code, 204)
-
