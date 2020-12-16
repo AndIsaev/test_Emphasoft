@@ -3,6 +3,7 @@ from django.test import  Client
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
+
 User = get_user_model()
 
 
@@ -65,7 +66,7 @@ class ProfileTestGetPutDelete(APITestCase):
 
 
         def test_user_put(self):
-            """Изменяем данные пользователя"""
+            """Иызменяем данне пользователя"""
             data = {"username": "Davinci","last_name": "Leo", "password": "terminator2000"}
             response = self.client.put("/api/v1/users/1/", data)
             self.assertEqual(response.status_code, 200)
@@ -75,11 +76,9 @@ class ProfileTestGetPutDelete(APITestCase):
             """Изменяем данные пользователя анонимом"""
             data = {"username": "Davinci","last_name": "Leo", "password": "terminator2000"}
             response = self.unauth_client.put("/api/v1/users/1/", data)
-            print(response)
             self.assertEqual(response.status_code, 401)
 
         def test_user_delete_client(self):
             """Удаляем данные пользователя"""
             response = self.client.delete("/api/v1/users/1/")
-            print(response)
             self.assertEqual(response.status_code, 204)

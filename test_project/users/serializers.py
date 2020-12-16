@@ -6,11 +6,4 @@ class UserSerializer(serializers.ModelSerializer):
     """Сериалайзер для нашего юзера"""
     class Meta:
         model = User
-        fields = ('id', 'username',
-                  'first_name', 'last_name',
-                  'is_active', 'last_login',
-                  'is_superuser'
-                  )
-
-        def create(self, validated_data):
-            return User.objects.create_user(**validated_data)
+        fields = "__all__"
